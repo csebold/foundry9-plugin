@@ -5,9 +5,10 @@
   "license": "ISC",
   "author": "",
   "type": "nodenext",
-  "main": "index.js",
+  "main": "main.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+      "test": "echo \"Error: no test specified\" && exit 1",
+      "deploy": "git archive master | tar -x -C "
   },
   "devDependencies": {
     "@types/node": "^22.13.14",
