@@ -1,0 +1,5 @@
+/* Optional: Custom styles for your plugin */
+.foundry9-plugin-custom-class {
+    color: red;
+    font-weight: bold;
+}

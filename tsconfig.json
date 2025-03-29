@@ -1,0 +1,15 @@
+{
+  "compilerOptions": {
+    "target": "ES2020",
+      "module": "CommonJS",
+    "strict": true,
+    "noImplicitAny": false,
+    "esModuleInterop": true,
+    "skipLibCheck": true,
+    "outDir": "./",
+    "moduleResolution": "Node",
+    "types": ["obsidian"]
+  },
+    "files": ["main.ts"]
+}
+

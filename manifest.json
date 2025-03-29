@@ -1,0 +1,10 @@
+{
+    "id": "foundry-9",
+    "name": "Foundry9 Obsidian Specials",
+    "version": "0.0.1",
+    "minAppVersion": "0.15.0",
+    "description": "Foundry9 LLC Obsidian extension",
+    "author": "Charles Sebold <charles.sebold@foundry-9.com>",
+    "authorUrl": "https://foundry-9.com/",
+    "isDesktopOnly": false
+}
