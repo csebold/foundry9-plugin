@@ -8,7 +8,7 @@
   "main": "main.js",
   "scripts": {
       "test": "echo \"Error: no test specified\" && exit 1",
-      "deploy": "git archive master | tar -x -C "
+      "deploy": "git archive main | tar -x -C "
   },
   "devDependencies": {
     "@types/node": "^22.13.14",
