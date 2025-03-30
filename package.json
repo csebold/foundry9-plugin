@@ -9,6 +9,7 @@
   "scripts": {
       "test": "echo \"Error: no test specified\" && exit 1",
       "clean": "rm -rf ",
+	"mkdir": "mkdir -p ",
       "deploy": "git archive main | tar -x -C "
   },
   "devDependencies": {
