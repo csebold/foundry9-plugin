@@ -3,3 +3,27 @@
     color: red;
     font-weight: bold;
 }
+
+.foundry9 {
+
+    .upsize1 {
+        font-size: 1.0em;
+    }
+
+    .upsize2 {
+        font-size: large;
+    }
+
+    .upsize3 {
+        font-size: larger;
+    }
+
+    .upsize4 {
+        font-size: x-large;
+    }
+
+    .upsize5 {
+        font-size: xx-large;
+    }
+
+}

@@ -3,7 +3,7 @@
 source ./scripts/private.sh
 if [ "$DESTDIR" != "" ] ; then
 	COMMANDS=("$@")
-	WORKDIR=$DESTDIR
+	WORKDIR="$DESTDIR"
 else
 	PARMS=("$@")
 	COMMANDS=("${PARMS[@]:0:${#PARMS[@]}-1}")
