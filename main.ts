@@ -1,4 +1,19 @@
-import { Notice, Plugin, MarkdownPostProcessorContext } from "obsidian";
+import { Notice, Plugin } from "obsidian";
+
+export const f9fontSizeAbsRegex = /&amp;(\^+)(.*?)\1&amp;/g;
+export const f9fontSizeRelRegex = /&amp;~(\^+)(.*?)\1~&amp;/g;
+
+export const f9fontSizeAbsClass = 'upsize';
+export const f9fontSizeRelClass = 'relsize';
+
+export const f9MarkdownAdditions: {
+    size: [ string, RegExp ][];
+} = {
+    size: [
+        [ f9fontSizeAbsClass, f9fontSizeAbsRegex ],
+        [ f9fontSizeRelClass, f9fontSizeRelRegex ]
+    ]
+};
 
 export default class Foundry9Plugin extends Plugin {
     async onload() {
@@ -9,28 +24,32 @@ export default class Foundry9Plugin extends Plugin {
             id: "show-alert",
             name: "Show Alert",
             callback: () => {
-                new Notice("Hello from your plugin!");
+                new Notice("Foundry9 reports test succeeded");
             }
         });
+
+        // Register a markdown post processor
+        this.registerMarkdownPostProcessor(this.foundry9MarkdownAdditions);
     }
 
-    private readonly fontSizeRegex = /&(\^+)(.*?)\1&/g;
-
-    foundry9MarkdownAdditions(source: string, el: HTMLElement, ctx: MarkdownPostProcessorContext) {
-        // This is where you can add your custom markdown processing logic
-        // For example, you could parse the source string and modify the el element
-        let match: RegExpExecArray | null;
-
-        while ((match = this.fontSizeRegex.exec(source)) !== null) {
-            const sizeMarkers = match[1];
-            const span = document.createElement("span");
-            span.classList.add("foundry9", `upsize${sizeMarkers.length}`);
-            span.innerText = match[2];
-            el.appendChild(span);
-        }
+    private foundry9MarkdownAdditions(el: HTMLElement) {
+        const source = el.innerHTML;
+        for (const [ className, regex ] of f9MarkdownAdditions.size) {
+            if (regex.test(source)) {
+                const output = source.replace(regex,
+                    (_match: string, sizeMarkers: string, text: string) => {
+                        const span = document.createElement("span");
+                        span.classList.add("foundry9", `${ className }${ sizeMarkers.length }`);
+                        span.innerText = text;
+                        return span.outerHTML;
+                    }
+                );
+                el.innerHTML = output;
+            }
+        };
     }
 
     onunload() {
-        console.log("My Plugin has unloaded!");
+        console.log("Foundry9Plugin has unloaded!");
     }
 }

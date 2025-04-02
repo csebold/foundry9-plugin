@@ -4,17 +4,22 @@
   "description": "Obsidian plugin",
   "license": "ISC",
   "author": "",
-  "type": "nodenext",
+  "type": "commonjs",
   "main": "main.js",
   "scripts": {
-      "test": "echo \"Error: no test specified\" && exit 1",
-      "clean": "rm -rf ",
-	"mkdir": "mkdir -p ",
-      "deploy": "git archive main | tar -x -C "
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "lint": "eslint .",
+    "clean": "rm -rf ",
+    "mkdir": "mkdir -p ",
+    "deploy": "git archive main | tar -x -C "
   },
   "devDependencies": {
+    "@eslint/js": "^9.23.0",
     "@types/node": "^22.13.14",
+    "eslint": "^9.23.0",
+    "globals": "^16.0.0",
     "obsidian": "^1.8.7",
-    "typescript": "^5.8.2"
+    "typescript": "^5.8.2",
+    "typescript-eslint": "^8.29.0"
   }
 }
