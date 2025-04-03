@@ -1,9 +1,10 @@
 {
     "sourceBase": "dist",
     "targetBase": "output",
-    "dirs": [],
+    "dirs": [
+        "dist"
+    ],
     "files": [
-        "*.js",
         "manifest.json",
         "styles.css"
     ],

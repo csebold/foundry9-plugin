@@ -1,4 +1,4 @@
-import { cpSync, globSync, readFileSync } from 'fs';
+import { cpSync, existsSync, globSync, readFileSync, rmSync } from 'fs';
 import { FileManifest, FileManifestLike } from './filemanifest';
 import { PackageJson } from './packageJson';
 import { env } from 'process';
@@ -38,24 +38,43 @@ export class Deployer {
         this.longVersionWithCommit = `${ this.longVersion } (${ this.commit })`;
     }
 
-    public debugMsg(str: string) {
+    private clean() {
+        const outdirs = [ "dist", "output", this.manifest.targetBase ];
+        this.debugMsg(`Cleaning out ${ JSON.stringify(outdirs) }`);
+        for (const dir of outdirs) {
+            if (existsSync(dir)) {
+                this.debugMsg(`Removing directory: ${ dir }`);
+                if (this.manifest.dryRun) {
+                    console.log(`Dry run: would remove ${ dir }`);
+                } else {
+                    rmSync(dir, {
+                        recursive: true
+                    });
+                }
+            }
+        }
+    }
+
+    private debugMsg(str: string) {
         if (this.manifest.debug) {
             console.log(str);
         }
     }
 
-    public deploy() {
+    private deploy() {
         this.debugMsg(`Deploying based on ${ JSON.stringify(this, null, 2) }`);
         if (env.DEPLOY_PATH || this.manifest.targetBase) {
             this.manifest.targetBase = env.DEPLOY_PATH ?? this.manifest.targetBase;
             this.debugMsg(`Deploying to ${ this.manifest.targetBase }`);
             try {
+                console.log(`Cycling through ${ JSON.stringify(this.manifest.dirs) }`);
                 for (const dir of this.manifest.dirs) {
-                    const fullPath = `${ this.manifest.targetBase }/${ dir }`;
+                    const fullPath = this.manifest.targetBase;
                     this.debugMsg(`Creating directory: ${ fullPath }`);
                     if (this.manifest.dryRun) {
                         console.log(`Dry run: copying ${ dir } to ${ fullPath }`);
                     } else {
+                        this.debugMsg(`Copying directory ${ dir } to ${ fullPath }`);
                         cpSync(dir, fullPath, {
                             recursive: true,
                             force: true
@@ -83,7 +102,8 @@ export class Deployer {
         }
     }
 
-    public argumentHandler(argv: string[]) {
+    public run(argv: string[]) {
+        argv.splice(0, 2);
         this.manifest.command = argv.shift();
         while (argv.length > 0) {
             const arg = argv.shift();
@@ -109,8 +129,15 @@ export class Deployer {
                 console.log("Dry run mode: No files will be copied.");
                 this.manifest.dryRun = true;
             } else if (arg === "--debug" || arg === "-d") {
+                console.log("Debug mode enabled.");
                 this.manifest.debug = true;
             }
+        }
+        if (this.manifest.command === "clean") {
+            this.clean();
+        }
+        if (this.manifest.command === "deploy") {
+            this.deploy();
         }
     }
 }
