@@ -1,0 +1,34 @@
+{
+    "$schema": "http://json-schema.org/draft-07/schema#",
+    "type": "object",
+    "properties": {
+        "sourceBase": {
+            "type": "string",
+            "description": "The base directory for the source files."
+        },
+        "targetBase": {
+            "type": "string",
+            "description": "The base directory for the target files."
+        },
+        "dirs": {
+            "type": "array",
+            "description": "An array representing directories.",
+            "items": {
+                "type": "string"
+            }
+        },
+        "files": {
+            "type": "array",
+            "description": "An array representing files.",
+            "items": {
+                "type": "string"
+            }
+        },
+        "dryRun": {
+            "type": "boolean",
+            "description": "A flag indicating whether the operation is a dry run or not."
+        }
+    },
+    "required": [],
+    "additionalProperties": false
+}
