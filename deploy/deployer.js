@@ -36,6 +36,23 @@ class Deployer {
         this.commit = (0, child_process_1.spawnSync)("git", ["rev-parse", "--short", "HEAD"]).stdout.toString().trim();
         this.longVersionWithCommit = `${this.longVersion} (${this.commit})`;
     }
+    clean() {
+        const outdirs = ["dist", "output", this.manifest.targetBase];
+        this.debugMsg(`Cleaning out ${JSON.stringify(outdirs)}`);
+        for (const dir of outdirs) {
+            if ((0, fs_1.existsSync)(dir)) {
+                this.debugMsg(`Removing directory: ${dir}`);
+                if (this.manifest.dryRun) {
+                    console.log(`Dry run: would remove ${dir}`);
+                }
+                else {
+                    (0, fs_1.rmSync)(dir, {
+                        recursive: true
+                    });
+                }
+            }
+        }
+    }
     debugMsg(str) {
         if (this.manifest.debug) {
             console.log(str);
@@ -47,13 +64,15 @@ class Deployer {
             this.manifest.targetBase = process_1.env.DEPLOY_PATH ?? this.manifest.targetBase;
             this.debugMsg(`Deploying to ${this.manifest.targetBase}`);
             try {
+                console.log(`Cycling through ${JSON.stringify(this.manifest.dirs)}`);
                 for (const dir of this.manifest.dirs) {
-                    const fullPath = `${this.manifest.targetBase}/${dir}`;
+                    const fullPath = this.manifest.targetBase;
                     this.debugMsg(`Creating directory: ${fullPath}`);
                     if (this.manifest.dryRun) {
                         console.log(`Dry run: copying ${dir} to ${fullPath}`);
                     }
                     else {
+                        this.debugMsg(`Copying directory ${dir} to ${fullPath}`);
                         (0, fs_1.cpSync)(dir, fullPath, {
                             recursive: true,
                             force: true
@@ -82,7 +101,8 @@ class Deployer {
             }
         }
     }
-    argumentHandler(argv) {
+    run(argv) {
+        argv.splice(0, 2);
         this.manifest.command = argv.shift();
         while (argv.length > 0) {
             const arg = argv.shift();
@@ -113,8 +133,15 @@ class Deployer {
                 this.manifest.dryRun = true;
             }
             else if (arg === "--debug" || arg === "-d") {
+                console.log("Debug mode enabled.");
                 this.manifest.debug = true;
             }
+        }
+        if (this.manifest.command === "clean") {
+            this.clean();
+        }
+        if (this.manifest.command === "deploy") {
+            this.deploy();
         }
     }
 }
