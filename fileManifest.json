@@ -7,5 +7,6 @@
         "manifest.json",
         "styles.css"
     ],
-    "dryRun": false
+    "dryRun": false,
+    "debug": false
 }
