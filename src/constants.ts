@@ -13,34 +13,12 @@ const f9MarkdownAdditions: {
     ]
 };
 
-const stylesheet = `/* Optional: Custom styles for your plugin */
+const f9BaseClass = 'foundry9';
+
+const stylesheet = `/* Foundry9 Plugin Stylesheet */
 .foundry9-plugin-custom-class {
     color: red;
     font-weight: bold;
-}
-
-.foundry9.upsize1 {
-    font-size: 24px;
-}
-
-.foundry9.upsize2 {
-    font-size: 36px;
-}
-
-.foundry9.upsize3 {
-    font-size: 48px;
-}
-
-.foundry9.upsize4 {
-    font-size: 64px;
-}
-
-.foundry9.upsize5 {
-    font-size: 80px;
-}
-
-.foundry9.upsize1 {
-    font-size: 2rem;
 }
 
 .foundry9.relsize2 {
@@ -65,5 +43,6 @@ export {
     f9fontSizeAbsClass,
     f9fontSizeRelClass,
     f9MarkdownAdditions,
+    f9BaseClass,
     stylesheet
 };
