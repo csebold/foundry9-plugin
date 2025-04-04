@@ -1,21 +1,9 @@
 import { Notice, Plugin } from "obsidian";
-
-export const f9fontSizeAbsRegex = /&amp;(\^+)(.*?)\1&amp;/g;
-export const f9fontSizeRelRegex = /&amp;~(\^+)(.*?)\1~&amp;/g;
-
-export const f9fontSizeAbsClass = 'upsize';
-export const f9fontSizeRelClass = 'relsize';
-
-export const f9MarkdownAdditions: {
-    size: [ string, RegExp ][];
-} = {
-    size: [
-        [ f9fontSizeAbsClass, f9fontSizeAbsRegex ],
-        [ f9fontSizeRelClass, f9fontSizeRelRegex ]
-    ]
-};
+import { stylesheet, f9MarkdownAdditions } from "./constants";
 
 export default class Foundry9Plugin extends Plugin {
+    private readonly f9BaseStyle = stylesheet;
+
     async onload() {
         console.log("Loading Foundry9Plugin...");
 
@@ -29,10 +17,11 @@ export default class Foundry9Plugin extends Plugin {
         });
 
         // Register a markdown post processor
-        this.registerMarkdownPostProcessor(this.foundry9MarkdownAdditions);
+        this.registerMarkdownPostProcessor(this.f9InsertStyle);
+        this.registerMarkdownPostProcessor(this.f9MarkdownAdditions);
     }
 
-    private foundry9MarkdownAdditions(el: HTMLElement) {
+    private f9MarkdownAdditions(el: HTMLElement) {
         const source = el.innerHTML;
         for (const [ className, regex ] of f9MarkdownAdditions.size) {
             if (regex.test(source)) {
@@ -47,6 +36,12 @@ export default class Foundry9Plugin extends Plugin {
                 el.innerHTML = output;
             }
         };
+    }
+
+    private f9InsertStyle(el: HTMLElement) {
+        const style = document.createElement("style");
+        style.innerText = this.f9BaseStyle;
+        el.prepend(style);
     }
 
     onunload() {

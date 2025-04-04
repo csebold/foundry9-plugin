@@ -5,8 +5,7 @@
         "dist"
     ],
     "files": [
-        "manifest.json",
-        "styles.css"
+        "manifest.json"
     ],
     "dryRun": false,
     "debug": false
