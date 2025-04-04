@@ -1,0 +1,12 @@
+{
+    "compilerOptions": {
+        "module": "NodeNext",
+        "target": "ESNext",
+        "moduleResolution": "NodeNext",
+        "strict": true,
+        "resolveJsonModule": true
+    },
+    "files": [
+        "deploy.ts"
+    ],
+}

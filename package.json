@@ -2,16 +2,26 @@
   "name": "foundry-9",
   "version": "1.0.0",
   "description": "Obsidian plugin",
-  "license": "ISC",
-  "author": "",
-  "type": "nodenext",
-  "main": "index.js",
+  "license": "UNLICENSED",
+  "author": "Charles Sebold <charles.sebold@foundry-9.com",
+  "type": "commonjs",
+  "main": "main.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "tsc -p tsconfig.json && tsc -p deploy/tsconfig.json",
+    "lint": "eslint .",
+    "clean": "node deploy/deploy.js clean",
+    "deploy": "node deploy/deploy.js deploy"
   },
   "devDependencies": {
+    "@eslint/js": "^9.23.0",
     "@types/node": "^22.13.14",
+    "cross-env": "^7.0.3",
+    "eslint": "^9.23.0",
+    "execa": "^9.5.2",
+    "globals": "^16.0.0",
     "obsidian": "^1.8.7",
-    "typescript": "^5.8.2"
+    "typescript": "^5.8.2",
+    "typescript-eslint": "^8.29.0"
   }
 }

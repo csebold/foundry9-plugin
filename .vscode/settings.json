@@ -1,0 +1,10 @@
+{
+    "json.schemas": [
+        {
+            "fileMatch": [
+                "fileManifest.json"
+            ], // Matches files named 'fileManifest.json'
+            "url": "./src/fileManifest.schema.json" // Path to your schema (relative to the workspace root)
+        }
+    ]
+}

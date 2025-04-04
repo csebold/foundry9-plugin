@@ -1,0 +1,13 @@
+{
+    "sourceBase": "dist",
+    "targetBase": "output",
+    "dirs": [
+        "dist"
+    ],
+    "files": [
+        "manifest.json",
+        "styles.css"
+    ],
+    "dryRun": false,
+    "debug": false
+}
