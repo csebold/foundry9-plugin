@@ -8,7 +8,7 @@
   "main": "main.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "build": "tsc -p tsconfig.json && tsc -p deploy/tsconfig.json",
+    "build": "tsc -p tsconfig.webpack.json && webpack --config webpack.config.js && tsc -p deploy/tsconfig.json",
     "lint": "eslint .",
     "clean": "node deploy/deploy.js clean",
     "deploy": "node deploy/deploy.js deploy"
@@ -16,12 +16,18 @@
   "devDependencies": {
     "@eslint/js": "^9.23.0",
     "@types/node": "^22.13.14",
+    "@typescript-eslint/parser": "^8.29.0",
     "cross-env": "^7.0.3",
     "eslint": "^9.23.0",
     "execa": "^9.5.2",
     "globals": "^16.0.0",
     "obsidian": "^1.8.7",
+    "prettier": "^3.5.3",
+    "prettier-eslint": "^16.3.0",
+    "ts-loader": "^9.5.2",
     "typescript": "^5.8.2",
-    "typescript-eslint": "^8.29.0"
+    "typescript-eslint": "^8.29.0",
+    "webpack": "^5.98.0",
+    "webpack-cli": "^6.0.1"
   }
 }
