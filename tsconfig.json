@@ -1,19 +1,22 @@
 {
   "compilerOptions": {
-    "target": "ES2020",
-    "module": "CommonJS",
+    "target": "ESNext",
+    "module": "ESNext", // Webpack handles module bundling
     "strict": true,
     "noImplicitAny": false,
     "esModuleInterop": true,
     "skipLibCheck": true,
-    "outDir": "./dist/",
+    "outDir": "./dist", // Output directory for TypeScript
     "moduleResolution": "Node",
     "types": [
       "obsidian"
     ],
+    "resolveJsonModule": true,
+    "declaration": false // No need for declaration files in the bundle
   },
-  "files": [
-    "src/main.ts"
+  "include": [
+    "main.ts",
+    "src/**/*"
   ],
   "exclude": [
     "deploy/**/*"

@@ -1,0 +1,21 @@
+{
+  "compilerOptions": {
+    "target": "ES2020",
+    "module": "CommonJS",
+    "strict": true,
+    "noImplicitAny": false,
+    "skipLibCheck": true,
+    "outDir": "./",
+    "moduleResolution": "classic",
+    "types": [
+      "obsidian",
+      "node"
+    ],
+  },
+  "files": [
+    "webpack.config.ts"
+  ],
+  "exclude": [
+    "deploy/**/*"
+  ]
+}

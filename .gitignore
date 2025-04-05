@@ -3,3 +3,4 @@ node_modules
 testdir
 scripts/private.sh
 output
+deploy/**/*.js
