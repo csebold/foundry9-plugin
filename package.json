@@ -6,6 +6,10 @@
   "author": "Charles Sebold <charles.sebold@foundry-9.com",
   "type": "commonjs",
   "main": "main.js",
+  "repository": {
+    "type": "git",
+    "url": "https://gitlab.com/foundry9/foundry9-plugin.git"
+  },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "build": "tsc -p tsconfig.webpack.json && webpack --config webpack.config.js && tsc -p deploy/tsconfig.json",
